@@ -8,10 +8,8 @@ public class Main {
 
     public static void main(String[] args){
         String expression = "2 * (3 + 4)";
-        CalculatorLexer lexer = new CalculatorLexer(CharStreams.fromString(expression));
-        CalculatorParser parser = new CalculatorParser(new CommonTokenStream(lexer));
-        ParseTree tree = parser.start();
-        Integer answer = (Integer) new MyCalcVisitor().visit(tree);
+        MyCalcVisitor calculator=new MyCalcVisitor();
+        Integer answer = calculator.evaluate(expression);
         System.out.printf("%s = %s\n", expression, answer);
     }
 }
