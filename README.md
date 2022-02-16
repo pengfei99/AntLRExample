@@ -13,7 +13,7 @@ The official site : https://www.antlr.org/
 
 ## Create an AntLR project
 
-In this example, I used IntelliJ IDEA as the IDE. You can certainly use other things. So some of the below point may
+In this example, I used IntelliJ IDEA as the IDE. You can certainly use other things. So some of the below points may
 not compatible with your setup. 
 
 ### Step 1. Create a simple java project
@@ -111,7 +111,7 @@ INT   : ('0'..'9')+ ;
 WS    : [ \t\r\n]+ -> skip ;
 ```
 
-- line 1: `start` means the beginning of your language expression. `expr` is the main statement of your language
+- line 1: `start` means the beginning of your language expression (aka. root node of the syntax tree). `expr` is the main statement of your language
 - line 3: `expr` has four possible form:
     - `left` (*|/) `right` where left and right are also `expr`
     - `left` (+|-) `right` where left and right are also `expr`
@@ -123,9 +123,10 @@ WS    : [ \t\r\n]+ -> skip ;
 ### Step 6 Configure the Antlr plugin
 
 Open your grammar file, in our case it's the `Calculator.g4`. Right-click on the code source page. You should see a list
-of action. You should see two actions related to Antlr plugin
+of action. You should see three actions related to Antlr plugin
 1. Configure Antlr
 2. Generate Antlr Recognizer
+3. Test rule <name>
 
 First, we need to configure Antlr to specify how to generate the recognizer. Click on the `Configure Antlr` action, you
 should see below pop up window.
@@ -164,7 +165,7 @@ You should see the following output in the org.pengfei.parser
 
 ### Step 8: Listener vs Visitor
 
-By default, Antlr provides two patterns (e.g. Listener, visitor) to allow you to visit the parsed syntax tree. This [doc](https://saumitra.me/blog/antlr4-visitor-vs-listener-pattern/)
+By default, Antlr provides two patterns (e.g. Listener, visitor) to allow you to traverse the parsed syntax tree. This [doc](https://saumitra.me/blog/antlr4-visitor-vs-listener-pattern/)
 explains the difference between the two patterns.
 
 In general, If you plan to directly use the parser output for interpretation, the `visitor` is a good choice. You have 
