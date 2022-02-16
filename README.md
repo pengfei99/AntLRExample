@@ -132,7 +132,7 @@ should see below pop up window.
 
 ![Antlr_config](images/antlr_config.png)
 
-You need to edit at least three options:
+You need to edit below three options:
 - path of the output Antlr Recognizer
 - package/namespace of the output Antlr Recognizer
 - language of the Recognizer
@@ -184,3 +184,38 @@ implementation of the parser.
 
 In our case, we create a class called MyCalcVisitor that extends CalculatorBaseVisitor. In this class, we override all
 methods. 
+
+The main functions of these methods is to treat the output of the parsed tree. Each method correspond a node in the tree.
+When a node is visited, the corresponding method will be called. For example, for a expression `4*(1+2)`, you will have
+a tree as shown below:
+![antlr_syntax_tree](images/antlr_syntax_tree.png)
+
+4 is a `atomExpr`, when 4 is visited, the method `visitAtomExpr` will be called. Each visitor will return a value or
+call visit on another expression. At the end, Antlr will sum up the result and return the final result 
+For more detail on how to override methods, check `MyCalcVisitor.java`.
+
+### Step 10: Unit Test your parser
+
+To ensure you parser does exactly what you want, you should always test your parser. In this example, we use **Junit and 
+AssertJ** to test. For more details, please check
+
+
+### Step 11: Debug and preview the syntax tree
+
+If the language that you want to parse is complex, and you can find a bug. The best way is to use the preview of the
+parsed syntax tree. Follow the visitor, for each node visited, check the output of the corresponding visitor method.
+
+Note this is provided by the antlr idea plugin, if you don't have it. Skip the follow paragraph. 
+
+To enable the `Antlr preview`, open your .g4 file, right-click on the opened file, on the popup page, you should see 
+an action Test rule <name>, where name is the name that you give to the root node of your grammar. In our example, it's
+called start.
+
+Then click on ANTLR Preview, write your expression on the bottom left, you should see the generated tree on the bottom right.
+Below figure is an example
+
+![antlr_syntax_tree](images/antlr_syntax_tree.png)
+
+
+
+
